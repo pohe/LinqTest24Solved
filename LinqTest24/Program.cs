@@ -3,7 +3,7 @@ using LinqTest24;
 
 Console.WriteLine("Hello, LINQ Test 24!");
 
-List<string> names = new List<string>() { "Jakob", "Katrine", "Molle", "Gustav", "Jonas", "Marius", "Kim", "Magnus", "Stephane" };
+List<string> names = new List<string>() { "Jacob", "Katrine", "Molle", "Gustav", "Jonas", "Marius", "Kim", "Magnus", "Stephane" };
 
 //Opgave 1
 // Find antallet af navne i listen names?
@@ -21,7 +21,7 @@ Console.WriteLine($"Number of names {numOfNames2}");
 // Find den gennemsnitlige længde af navnene i names?
 //Udskriv resultatet
 Console.WriteLine("Opgave 2");
-var averageLength = (from name in names select name.Length).Sum()/(numbersOfNames*1.0);
+var averageLength = (from name in names select name.Length).Average();
 Console.WriteLine($"Average length of names {averageLength}");
 
 
@@ -29,7 +29,7 @@ Console.WriteLine($"Average length of names {averageLength}");
 //Udskriv navnene i names sorteret
 Console.WriteLine("Opgave 3");
 var result = from name in names
-             orderby name 
+             orderby name
              select name;
 
 foreach (var name in result)
@@ -67,7 +67,7 @@ List<Movie> movies = new List<Movie>()
 movies[0].Actors = new List<Actor>() { new Actor() { Name = "Dustin Hoffmann" }, new Actor() { Name = "Denzel Washington" } };
 movies[1].Actors = new List<Actor>() { new Actor() { Name = "Meryl Streep" }, new Actor() { Name = "Jack Nicholson" } };
 movies[2].Actors = new List<Actor>() { new Actor() { Name = "Ralph Fiennes" }, new Actor() { Name = "Sigourney Weaver" } };
-movies[3].Actors = new List<Actor>() { new Actor() { Name = "Robert De Niro" }, new Actor() { Name = "Al Pacino" } };
+movies[3].Actors = new List<Actor>() { new Actor() { Name = "Robert De Niro" }, new Actor() { Name = "Al Pacino" }, new Actor() { Name = "Sigourney Weaver" } };
 movies[4].Actors = new List<Actor>() { new Actor() { Name = "Dustin Hoffmann" }, new Actor() { Name = " Jack Nicholson" } };
 #endregion
 
@@ -116,7 +116,7 @@ foreach (var snm in studioeNewYorkMoreThan3000)
 Console.WriteLine("Opgave 7");
 
 var movieWithMorethan2Actors = from m in movies
-                               where m.Actors.Count >= 2
+                               where m.Actors.Count > 2
                                select m;
 foreach (var mw2a in movieWithMorethan2Actors)
 {
@@ -136,7 +136,7 @@ var moviesWithDustinHoffman2 = from m in movies
                                       select a).Count() != 0
                                 select m.Title;
 
-var fluentOpg8 = movies.Where(m => m.Actors.Where(a => a.Name == "Dustin Hooffmann").Count()!=0);
+//var fluentOpg8 = movies.Where(m => m.Actors.Where(a => a.Name == "Dustin Hoffmann").Count()!=0);
 foreach (var mwd in moviesWithDustinHoffman2)
 {
     Console.WriteLine(mwd);
@@ -164,7 +164,7 @@ foreach (var number in lowestOddNumbers)
 
 
 //Opgave 10
-//Find de 2 laveste ulige tal i listen numbers og som der ikke forekommer dubletter af og udskriv dem i falden orden
+//Find de 2 højeste ulige tal i listen numbers og som der ikke forekommer dubletter af og udskriv dem i falden orden
 Console.WriteLine("Opgave 10");
 
 var lowestDistinctOddNumbers = numbers.Where(n => n % 2 != 0).Distinct().OrderByDescending(n => n).Take(2);
@@ -177,14 +177,14 @@ foreach (var number in lowestDistinctOddNumbers)
 
 //Opgave 11
 // Find alle movies 
-var moviesWithStudioInNYAndMoreThan3000Employees = from movie in movies
-                                                   join studio in studios on movie.StudioName equals studio.StudioName
-                                                   where studio.HQCity == "New York" && studio.NoOfEmployees > 3000
-                                                   select movie;
+//var moviesWithStudioInNYAndMoreThan3000Employees = from movie in movies
+//                                                   join studio in studios on movie.StudioName equals studio.StudioName
+//                                                   where studio.HQCity == "New York" && studio.NoOfEmployees > 3000
+//                                                   select movie;
 
-var moviesWithDustinHoffman = moviesWithStudioInNYAndMoreThan3000Employees.Where(movie => movie.Actors.Any(actor => actor.Name == "Dustin Hoffman"));
+//var moviesWithDustinHoffman = moviesWithStudioInNYAndMoreThan3000Employees.Where(movie => movie.Actors.Any(actor => actor.Name == "Dustin Hoffman"));
 
-foreach (var movie in moviesWithDustinHoffman)
-{
-    Console.WriteLine(movie.Title);
-}
+//foreach (var movie in moviesWithDustinHoffman)
+//{
+//    Console.WriteLine(movie.Title);
+//}
